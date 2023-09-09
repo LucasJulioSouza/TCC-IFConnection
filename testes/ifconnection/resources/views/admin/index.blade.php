@@ -1,11 +1,14 @@
 @extends('templates.adminPrincipal', ['titulo' => "Principal"])
 
-@section('titulo') Principal @endsection
+@section('titulo') Cadastro de usuarios @endsection
 
 @section('conteudo')
 
 <div class="container">
-    <h1>Usuários Cadastrados</h1>
+    <h1>Cadastro de usuarios</h1>
+    
+    <!-- Adicione o botão para a rota de registro -->
+    <a href="{{ route('admin.create') }}" class="btn btn-primary">Criar Admin</a>
 
     <table class="table">
         <thead>
@@ -28,6 +31,7 @@
         </tbody>
     </table>
 </div>
+
 
 
 

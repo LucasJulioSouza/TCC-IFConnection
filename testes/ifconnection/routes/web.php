@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('auth.login');
@@ -27,17 +28,17 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::resource('/cursos', '\App\Http\Controllers\CursoController');
-
     Route::resource('projetos', 'ProjetoController');
     Route::resource('alunos', 'AlunoController');
     Route::resource('orientacao', 'OrientacaoController');
     Route::resource('professores', 'ProfessorController');
+    Route::resource('admin', 'AdminController');
 
-    // Rotas para a área administrativa
-    Route::middleware(['admin'])->group(function () {
-        Route::get('/admin', [AdminController::class, 'index'])->name('admin.index'); // Página inicial do painel de administração
-        // Adicione outras rotas administrativas conforme necessário
-    });
+
+    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::get('/admin/create', 'AdminController@create')->name('admin.create');
+
+    
 });
 
 require __DIR__.'/auth.php';
