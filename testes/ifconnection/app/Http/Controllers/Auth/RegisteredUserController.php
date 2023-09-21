@@ -34,28 +34,28 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
 
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'type_id' => $request->type_id,
+        'password' => Hash::make($request->password),
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'type_id' => $request->type_id,        
-            'password' => Hash::make($request->password),
-        ]);
+    event(new Registered($user));
 
-        event(new Registered($user));
+    
 
-        Auth::login($user);
+    
 
-        // Carregando as Permissões do Usuário / Sessão
-        UserPermissions::loadPermissions(Auth::user()->type_id);
-
-        return redirect(RouteServiceProvider::HOME);
-    }
+    // Redirecionar de volta para a rota anterior (ou para uma rota personalizada)
+    return redirect('/admin')->with('success', 'Registro bem-sucedido! Você está logado agora.');
+}
 }

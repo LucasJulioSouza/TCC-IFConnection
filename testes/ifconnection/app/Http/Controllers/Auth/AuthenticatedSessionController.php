@@ -32,6 +32,11 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        if (Auth::check() && Auth::user()->ativo === 0) {
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Seu usuário está desabilitado! Contate a Direção do curso.');
+        }
+
         $request->session()->regenerate();
 
         // Carregando as Permissões do Usuário / Sessão

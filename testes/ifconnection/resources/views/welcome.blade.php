@@ -17,7 +17,7 @@
         <style>
            body {
             font-family: 'Nunito', sans-serif;
-            background-color: #e90c0c; /* Substitua esta cor pela cor desejada */
+            background-color: #e90c0c; 
         }
         </style>
     </head>
@@ -36,6 +36,8 @@
                     @endauth
                 </div>
             @endif
+
+        
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">

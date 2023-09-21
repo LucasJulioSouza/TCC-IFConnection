@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 use App\Models\Type;
 
@@ -15,9 +16,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::all(); // Busca todos os usuários
+        $users= User::all(); 
 
-        return view('admin.index', compact('users'));
+        return view('admin.index', compact(['users']));
     }
 
     /**
@@ -71,9 +72,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
+    
+    
     }
 
     /**
@@ -85,5 +86,23 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function desativarUsuario($id){
+        $usuario = User::find($id);
+        $usuario->ativo = false;
+        $usuario->save();
+        
+        return Redirect::route('admin.index')->with('success', 'Usuário desativado com sucesso');
+    
+    }
+
+    public function ativarUsuario($id){
+        $usuario = User::find($id);
+        $usuario->ativo = true;
+        $usuario->save();
+        
+        return Redirect::route('admin.index')->with('success', 'Usuário ativado com sucesso');
+
     }
 }

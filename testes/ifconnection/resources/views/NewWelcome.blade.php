@@ -13,6 +13,7 @@
 
     </head>
     <body>
+        
         <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-success">
             <div class="ml-auto">
                 @if (Route::has('login'))
@@ -34,6 +35,12 @@
                 @endif
             </div>
         </nav>
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         
         <nav class="navbar fixed-bottom navbar-dark bg-success">
             <div class="container-fluid">
