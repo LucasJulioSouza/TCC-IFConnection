@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('alunos', 'AlunoController');
     Route::resource('orientacao', 'OrientacaoController');
     Route::resource('professores', 'ProfessorController');
+    
 
     Route::middleware(['custom-auth'])->group(function () {
         Route::resource('admin', 'AdminController');

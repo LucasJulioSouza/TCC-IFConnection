@@ -44,15 +44,9 @@
                 </div>
             </div>
         </nav>
-        <div class="container py-4">
-            <div class="row">
-                <div class="col">
-                    <h3 class="display-7 text-secondary d-none d-md-block"><b>{{ $titulo }}</b></h3>
-                </div>
-            </div>
-            <hr>
+        
             @yield('conteudo')
-        </div>
+        
         <nav class="navbar fixed-bottom navbar-dark bg-dark">
             <div class="container-fluid">
                 <img src="https://seeklogo.com/images/I/ifpr-instituto-federal-do-parana-icone-logo-E4B5B3D67E-seeklogo.com.png" alt="ifpr" width="50" height="50">

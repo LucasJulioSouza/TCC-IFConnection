@@ -35,27 +35,33 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'confirmed', Rules\Password::defaults()],
-    ]);
-
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'type_id' => $request->type_id,
-        'password' => Hash::make($request->password),
-    ]);
-
-    event(new Registered($user));
-
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'type_id' => ['required', 'exists:types,id'], // Certifique-se de que o tipo existe
+            'lattes' => ['nullable', 'string'], // Adicione uma regra de validação para 'lattes'
+        ]);
     
-
+        $userData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'type_id' => $request->type_id,
+            'password' => Hash::make($request->password),
+        ];
     
-
-    // Redirecionar de volta para a rota anterior (ou para uma rota personalizada)
-    return redirect('/admin')->with('success', 'Registro bem-sucedido! Você está logado agora.');
-}
+        // Adicione o campo 'lattes' ao array de dados do usuário se o tipo for 'professor'
+        if ($request->type_id == 'valor_do_tipo_professor') {
+            $userData['lattes'] = $request->lattes;
+        }
+    
+        $user = User::create($userData);
+    
+        event(new Registered($user));
+    
+        // Redirecionar de volta para a rota anterior (ou para uma rota personalizada)
+        return redirect('/admin')->with('success', 'Registro bem-sucedido! Você está logado agora.');
+    }
+    
 }
