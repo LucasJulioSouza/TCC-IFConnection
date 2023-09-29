@@ -1,4 +1,4 @@
-@extends('templates.Pprincipal', ['titulo' => "Projetos"])
+@extends('templates.Pprincipal', ['titulo' => "Perfil"])
 
 @section('titulo') 
    
@@ -8,9 +8,9 @@
 
     <div class="container">
        <h1>Perfil do Usuário</h1>
-       <p>Nome: {{ $user->name }}</p>
-      <p>Email: {{ $user->email }}</p>
-      <!-- Outros detalhes do usuário -->
+       <p>Nome: {{ $professor->name }}</p>
+      <p>Email: {{ $professor->email }}</p>
+      
     </div>
     
 @endsection

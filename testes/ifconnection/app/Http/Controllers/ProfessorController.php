@@ -13,11 +13,10 @@ class ProfessorController extends Controller
      */
     public function index()
     {
-        
-        
-        $user = auth()->user();
+    
+        $professor = auth()->user();
 
-        return view('professores.index', compact(['user']));
+        return view('professores.index', compact(['professor']));
     }
 
     /**
