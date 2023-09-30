@@ -70,6 +70,7 @@
                             <div class="form-group">
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
+                                    <a href="{{ route('admin.index') }}" class="btn btn-secondary">Voltar</a>
                                 </div>
                             </div>
                         </form>

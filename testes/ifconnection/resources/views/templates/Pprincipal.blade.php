@@ -58,8 +58,6 @@
             </div>
         </nav>
         <div class="container py-4">
-            
-            
             @yield('conteudo')
         </div>
         <nav class="navbar fixed-bottom navbar-dark bg-primary">

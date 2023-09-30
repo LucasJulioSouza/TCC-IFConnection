@@ -25,7 +25,7 @@ Route::middleware(['auth'])->group(function () {
         }
 
         if ($userType === 1) {
-            return view('professores.index'); 
+            return redirect()->route('professores.index'); 
         } elseif ($userType === 2) {
             return view('alunos.index'); 
         } elseif ($userType === 3) {
