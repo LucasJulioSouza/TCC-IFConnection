@@ -70,9 +70,10 @@ class ProfessorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+    $lattes = Auth::user()->lattes;
+
+    return view('professores.edit', compact('lattes'));
     }
 
     /**
@@ -82,9 +83,12 @@ class ProfessorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request){
+    $user = Auth::user();
+    $user->lattes = $request->input('lattes');
+    $user->save();
+
+    return redirect()->route('professores.index')->with('success', 'Lattes atualizado com sucesso!');
     }
 
     /**

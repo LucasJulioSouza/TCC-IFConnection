@@ -26,7 +26,7 @@
         
         <div class="card-footer">
             @if (!empty($user->lattes))
-                <a href="{{ route('professores.index') }}" class="btn btn-primary">Editar Lattes</a>
+                <a href="{{ route('professores.edit',$user->id) }}" class="btn btn-primary">Editar Lattes</a>
             @else
                 <a href="{{ route('professores.create') }}" class="btn btn-primary">Cadastrar Lattes</a>
             @endif

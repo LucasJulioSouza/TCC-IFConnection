@@ -3,28 +3,16 @@
 @section('titulo', 'Lattes')
    
 @section('conteudo')
-    <form action="{{ route('projetos.update', $projeto->id) }}" method="POST">
+    <form action="{{ route('professores.update', $lattes) }}" method="POST">
         @csrf
         @method('PUT')
 
         <div class="form-group">
-            <label for="titulo">Título:</label>
-            <input type="text" class="form-control" id="titulo" name="titulo" value="{{ $projeto->titulo }}">
+            <label for="lattes">Lattes:</label>
+            <input type="text" class="form-control" id="lattes" name="lattes" value="{{ $lattes }}">
         </div>
 
-        <div class="form-group">
-            <label for="resumo">Resumo:</label>
-            <textarea class="form-control" id="resumo" name="resumo" rows="3">{{ $projeto->resumo }}</textarea>
-        </div>
-        
-        <div class="form-group">
-            <label for="foto">Foto:</label>
-            <input type="text" class="form-control" id="foto" name="foto" value="{{ $projeto->foto }}">
-        </div>
-
-        <div class="d-flex justify-content-between mt-4">
-            <button type="submit" class="btn btn-primary mr-2">Salvar</button>
-            <a href="{{ route('projetos.index') }}" class="btn btn-secondary">Voltar</a>
-        </div>
+        <!-- Adicione um botão de envio para salvar as alterações -->
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
     </form>
 @endsection
