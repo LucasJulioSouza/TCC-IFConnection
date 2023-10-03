@@ -3,16 +3,17 @@
 @section('titulo', 'Lattes')
    
 @section('conteudo')
-    <form action="{{ route('professores.update', $lattes) }}" method="POST">
-        @csrf
-        @method('PUT')
+<form action="{{ route('professores.update', ['id' => $user->id]) }}" method="POST">
+    @csrf
+    @method('PUT')
 
-        <div class="form-group">
-            <label for="lattes">Lattes:</label>
-            <input type="text" class="form-control" id="lattes" name="lattes" value="{{ $lattes }}">
-        </div>
+    <div class="form-group">
+        <label for="lattes">Lattes:</label>
+        <input type="text" class="form-control" id="lattes" name="lattes" value="{{ $user->lattes }}">
+    </div>
 
-        <!-- Adicione um botão de envio para salvar as alterações -->
+        <div class="d-flex justify-content-between mt-4">
         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        </div>
     </form>
 @endsection

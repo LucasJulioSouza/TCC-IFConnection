@@ -31,6 +31,7 @@ class ProjetoController extends Controller
     {
         
         return view('projetos.create');
+        
     }
 
     /**
