@@ -54,18 +54,29 @@ class ProfessorController extends Controller
     }
 
     
-    public function update(Request $request, $id){
-        $user = User::find($id);
+    public function update(Request $request, $id)
+{
+    $user = User::find($id);
 
-        if (!$user) {
-            return abort(404);
-        }
+    // Verifique se um arquivo de foto foi enviado
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $filePath = $file->storeAs('profile_photos', $fileName); // Salve a foto na pasta 'profile_photos'
 
-        $user->lattes = $request->input('lattes');
-        $user->save();
-
-        return redirect()->route('professores.index')->with('success', 'Lattes atualizado com sucesso!');
+        // Atualize o caminho da foto no banco de dados
+        $user->image = $filePath;
     }
+
+    // Outras atualizações de perfil
+    $user->lattes = $request->input('lattes');
+    // ...
+
+    $user->save();
+
+    return redirect()->route('professores.index')->with('success', 'Perfil atualizado com sucesso!');
+}
+
     
     public function destroy($id)
     {

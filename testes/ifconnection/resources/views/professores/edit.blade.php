@@ -3,9 +3,14 @@
 @section('titulo', 'Lattes')
    
 @section('conteudo')
-<form action="{{ route('professores.update', ['id' => $user->id]) }}" method="POST">
+<form action="{{ route('professores.update', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
+
+    <div class="form-group">
+        <label for="image">Foto de perfil</label>
+        <input type="file" class="form-control-file" id="image" name="image" >
+    </div>
 
     <div class="form-group">
         <label for="lattes">Lattes:</label>

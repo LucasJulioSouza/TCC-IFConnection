@@ -12,8 +12,10 @@
     <div class="card">
         <div class="card-header">
             Perfil
+            <img src="{{ asset($user->photo) }}" alt="Foto de Perfil">
         </div>
         <div class="card-body">
+            
             <p><strong>Nome:</strong> {{ $user->name }}</p>
             <p><strong>Email:</strong> {{ $user->email }}</p>
             
@@ -23,6 +25,7 @@
                 <p>Cadastre o link do seu Lattes!</p>
             @endif
         </div>
+
         
         <div class="card-footer">
             @if (!empty($user->lattes))
@@ -31,6 +34,8 @@
                 <a href="{{ route('professores.create') }}" class="btn btn-primary">Cadastrar Lattes</a>
             @endif
         </div>
+        
     </div>
+    <img src="{{ asset($user->photo) }}" alt="Foto de Perfil">
 </div>
 @endsection
