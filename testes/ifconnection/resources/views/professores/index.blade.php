@@ -12,10 +12,13 @@
     <div class="card">
         <div class="card-header">
             Perfil
-            <img src="{{ asset($user->photo) }}" alt="Foto de Perfil">
+            
+        </div>
+        <div class="card-header">
+            
+            <img src="http://servicosweb.cnpq.br/wspessoa/servletrecuperafoto?tipo=1&id=K4270762A6" alt="Foto de Perfil" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
         </div>
         <div class="card-body">
-            
             <p><strong>Nome:</strong> {{ $user->name }}</p>
             <p><strong>Email:</strong> {{ $user->email }}</p>
             
@@ -26,7 +29,6 @@
             @endif
         </div>
 
-        
         <div class="card-footer">
             @if (!empty($user->lattes))
                 <a href="{{ route('professores.edit',$user->id) }}" class="btn btn-primary">Editar Lattes</a>
@@ -34,8 +36,6 @@
                 <a href="{{ route('professores.create') }}" class="btn btn-primary">Cadastrar Lattes</a>
             @endif
         </div>
-        
     </div>
-    <img src="{{ asset($user->photo) }}" alt="Foto de Perfil">
 </div>
 @endsection
