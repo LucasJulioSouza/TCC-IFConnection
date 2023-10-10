@@ -25,13 +25,22 @@ class ProfessorController extends Controller
 
    
     public function store(Request $request){
-    
+        $user = Auth::user();
         $request->validate([
             'lattes' => 'required|url', 
         ]);
 
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->move(public_path('img/profile'), $fileName); // Salve a foto na pasta 'profile_photos'
     
-        $user = Auth::user();
+            // Atualize o caminho da foto no banco de dados
+            $user->image = 'img/profile/' . $fileName;
+        }
+
+    
+        
         $user->lattes = $request->input('lattes');
         $user->save();
 
@@ -60,12 +69,20 @@ class ProfessorController extends Controller
 
     // Verifique se um arquivo de foto foi enviado
     if ($request->hasFile('image')) {
+        // Apague a imagem antiga se ela existir
+        if ($user->image) {
+            $oldImagePath = public_path($user->image);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
+
         $file = $request->file('image');
         $fileName = time() . '_' . $file->getClientOriginalName();
-        $filePath = $file->storeAs('profile_photos', $fileName); // Salve a foto na pasta 'profile_photos'
+        $filePath = $file->move(public_path('img/profile'), $fileName); // Salve a foto na pasta 'profile_photos'
 
         // Atualize o caminho da foto no banco de dados
-        $user->image = $filePath;
+        $user->image = 'img/profile/' . $fileName;
     }
 
     // Outras atualizações de perfil
@@ -76,6 +93,7 @@ class ProfessorController extends Controller
 
     return redirect()->route('professores.index')->with('success', 'Perfil atualizado com sucesso!');
 }
+
 
     
     public function destroy($id)
