@@ -16,7 +16,7 @@ class AlunoController extends Controller
     public function index()
     {
 
-       $users = User::all();
+        $users= User::all(); 
 
         return view('alunos.index', compact(['users']));
     }
