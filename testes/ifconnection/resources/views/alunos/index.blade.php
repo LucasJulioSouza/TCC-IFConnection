@@ -16,9 +16,9 @@
                 <div class="card-header">
                     
                     @if (!empty($user->image))
-                        <img src="{{ $user->image }}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" >
+                        <img src="{{ $user->image }}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" >
                     @else
-                        <img src="img/profile/semFotoPerfil.png" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" >
+                        <img src="css/semFotoPerfil.png" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" >
                     @endif
 
                     
