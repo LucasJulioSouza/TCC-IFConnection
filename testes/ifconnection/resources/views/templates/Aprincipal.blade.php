@@ -15,40 +15,40 @@
         }
 
         .profile-image-container {
-    position: relative;
-    display: inline-block;
-}
+            position: relative;
+            display: inline-block;
+        }
 
-.image-container {
-    position: relative;
-    display: inline-block;
-}
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
 
-.profile-image {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #000;
-}
+        .profile-image {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #000;
+        }
 
-.edit-button {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    text-align: center;
-    padding: 5px 0;
-    cursor: pointer;
-    border-radius: 50%;
-}
+        .edit-button {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            cursor: pointer;
+            border-radius: 50%;
+        }
 
-.image-container:hover .edit-button {
-    display: block;
-}
+        .image-container:hover .edit-button {
+            display: block;
+        }
 
         </style>
         
