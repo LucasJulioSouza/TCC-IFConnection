@@ -5,17 +5,54 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <!-- Define uma seção "titulo" -->
+       
         <title>IFConnection - @yield('titulo')</title>
         <style>
         .gray-box {
-            background-color: #f0f0f0; /* Cor de fundo cinza claro */
-            border-radius: 10px; /* Raio das bordas arredondadas */
-            padding: 10px; /* Espaçamento interno para afastar o texto das bordas */
+            background-color: #f0f0f0; 
+            border-radius: 10px;
+            padding: 10px;
         }
+
+        .profile-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-image {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #000;
+}
+
+.edit-button {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.image-container:hover .edit-button {
+    display: block;
+}
+
         </style>
         
-        <!-- Bootstrap 5 / CSS -->
+       
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     </head>
@@ -23,28 +60,28 @@
         <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-success">
             <div class="container-fluid">
                 
-                <a href="#" class="navbar-brand ms-sm-3">
-                    <img src="css/ifprLogo.png" style="width: 290px; height: 80px;">
                 
-                </a>
+                <img src="css/ifprLogo.png" style="width: 290px; height: 80px;">
                 
-               
-                
-                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#itens">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-menu-button-wide" viewBox="0 0 16 16">
-                        <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v2A1.5 1.5 0 0 1 14.5 5h-13A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-13z"/>
-                        <path d="M2 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm10.823.323-.396-.396A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
-                    </svg>
-                </button>
                 
                 <span class="gray-box">
                     <div class="collapse navbar-collapse" id="itens">
                         <ul class="navbar-nav ms-auto align-items-center">
-                            @if (!empty(Auth::user()->image))
-                                <img src="{{ Auth::user()->image }}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" >
-                            @else
-                                <img src="css/semFotoPerfil.png" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" >
-                            @endif
+                            
+
+                            <div class="profile-image-container">
+                                @if (!empty(Auth::user()->image))
+                                    <div class="image-container">
+                                        <img src="{{ Auth::user()->image }}" style="width: 60px; height: 58px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" alt="Foto de Perfil" class="profile-image">
+                                        <a href="{{ route('alunos.edit', ['aluno' => Auth::user()]) }}" class="edit-link">
+                                            <div class="edit-button">Editar foto</div>
+                                        </a>
+                                        
+                                    </div>
+                                @else
+                                    <img src="css/semFotoPerfil.png" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" alt="Foto de Perfil" class="profile-image">
+                                @endif
+                            </div>
 
                             <span class="text-dark">{{ Auth::user()->name }}</span>
 
@@ -99,9 +136,9 @@
     
     
 
-    <!-- Bootstrap 5 / JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <!-- JQuery / JS -->
+  
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 
     

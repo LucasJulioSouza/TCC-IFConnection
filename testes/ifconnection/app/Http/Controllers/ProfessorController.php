@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Projeto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -96,8 +97,10 @@ class ProfessorController extends Controller
 
 
     
-    public function destroy($id)
+    public function projetos()
     {
-        //
+        $projetos= Projeto::all();
+
+        return view('professores.projetos',compact(['projetos']));
     }
 }

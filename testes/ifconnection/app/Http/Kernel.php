@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'blockAccess' => \App\Http\Middleware\BlockAccess::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'custom-auth' => \App\Http\Middleware\CustomAuthenticate::class,
+        'custom-auth-admin' => \App\Http\Middleware\CustomAuthenticate::class,
+        'custom-auth-professor' => \App\Http\Middleware\CustomAuthenticateProfessor::class,
     ];
 }

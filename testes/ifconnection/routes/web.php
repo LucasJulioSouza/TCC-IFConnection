@@ -38,15 +38,19 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('projetos', 'ProjetoController');
     Route::resource('alunos', 'AlunoController');
     Route::resource('orientacao', 'OrientacaoController');
-    Route::resource('professores', 'ProfessorController');
-    Route::put('/professores/{id}', 'ProfessorController@update')->name('professores.update');
 
-    Route::middleware(['custom-auth'])->group(function () {
+    Route::middleware(['custom-auth-admin'])->group(function () {
         Route::resource('admin', 'AdminController');
         Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
         Route::post('register', [RegisteredUserController::class, 'store']);
         Route::put('/admin/ativar-usuario/{id}', 'AdminController@ativarUsuario')->name('admin.ativarUsuario');
         Route::put('/admin/desativar-usuario/{id}', 'AdminController@desativarUsuario')->name('admin.desativarUsuario');
+    });
+
+    Route::middleware(['custom-auth-professor'])->group(function () {
+        Route::resource('professores', 'ProfessorController');
+        Route::put('/professores/{id}', 'ProfessorController@update')->name('professores.update');
+        Route::get('/professores/projetos', 'ProfessorController@projetos')->name('professores.projetos');
     });
 });
 
