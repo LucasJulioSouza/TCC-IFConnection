@@ -50,6 +50,12 @@
             display: block;
         }
 
+        body {
+            background-image: url('css/fotoWallpaper.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
         </style>
         
        
@@ -83,7 +89,7 @@
                                 @endif
                             </div>
 
-                            <span class="text-dark">{{ Auth::user()->name }}</span>
+                            <span class="text-dark" style="margin-left: 10px">{{ Auth::user()->name }}</span>
 
                             <li class="nav-item dropdown ps-2">
                                 <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#">
@@ -93,9 +99,15 @@
                                     <span class="ps-1 text-dark">Menu</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{route('alunos.index')}}" class="dropdown-item">Principal</a></li>
-                                    <li><a href="{{route('projetos.index')}}" class="dropdown-item">Projetos</a></li>
-                                    <li><a href="{{route('orientacao.index')}}" class="dropdown-item">Orientação</a></li>
+                                    @if ( Auth::user()->type_id === 1)
+                                        <a href="{{route('professores.index')}}" class="dropdown-item">Perfil</a>
+                                        <a href="{{route('projetos.index')}}" class="dropdown-item">Projetos</a>
+
+                                    @else
+                                        <li><a href="{{route('alunos.index')}}" class="dropdown-item">Principal</a></li>
+                                        <li><a href="{{route('projetos.index')}}" class="dropdown-item">Projetos</a></li>
+                                        <li><a href="{{route('orientacao.index')}}" class="dropdown-item">Orientação</a></li>
+                                    @endif
                                 </ul>
                             </li>
                             <li class="nav-item ps-2 me-3">
@@ -119,7 +131,7 @@
         <div class="container py-4">
             <div class="row">
                 <div class="col">
-                    <h3 class="display-7 text-secondary d-none d-md-block"><b>{{ $titulo }}</b></h3>
+                    <h3 class="display-7 text-white d-none d-md-block"><b>{{ $titulo }}</b></h3>
                 </div>
             </div>
             <hr>

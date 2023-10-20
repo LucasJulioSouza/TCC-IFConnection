@@ -17,7 +17,7 @@ class ProjetoController extends Controller
      */
     public function index()
     {
-        $projetos= Projeto::all();
+        $projetos = Projeto::with('user')->get();
 
         return view('projetos.index',compact(['projetos']));
     }

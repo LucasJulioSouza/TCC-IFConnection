@@ -1,4 +1,4 @@
-@extends('templates.Pprincipal', ['titulo' => "Cadastro de Lattes"])
+@extends('templates.Aprincipal', ['titulo' => "Cadastro de Lattes"])
 
 @section('titulo') 
    

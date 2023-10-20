@@ -14,6 +14,7 @@
     
     <!-- Adicione o botão para a rota de registro -->
     <a href="{{ route('admin.create') }}" class="btn btn-primary">Criar Usuário</a>
+    <a href="{{ route('materias.create') }}" class="btn btn-primary">Adicionar matérias</a>
 
     <table class="table">
         <thead>

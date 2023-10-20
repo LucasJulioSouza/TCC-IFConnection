@@ -1,4 +1,4 @@
-@extends('templates.Pprincipal', ['titulo' => "Perfil"])
+@extends('templates.Aprincipal', ['titulo' => "Perfil"])
 
 @section('titulo', 'Perfil')
 
@@ -34,7 +34,8 @@
 
         <div class="card-footer">
             @if (!empty($user->lattes))
-                <a href="{{ route('professores.edit',$user->id) }}" class="btn btn-primary">Editar Lattes e foto</a>
+                <a href="{{ route('professores.edit', ['id' => $user->id, 'edit_type' => 'lattes']) }}" class="btn btn-primary">Editar Lattes</a>
+                <a href="{{ route('professores.edit', ['id' => $user->id, 'edit_type' => 'foto']) }}" class="btn btn-primary">Editar Foto</a>
             @else
                 <a href="{{ route('professores.create') }}" class="btn btn-primary">Cadastrar Lattes e foto</a>
             @endif
