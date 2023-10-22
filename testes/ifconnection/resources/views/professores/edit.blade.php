@@ -17,8 +17,8 @@
     @else
 
     <div class="form-group">
-        <label for="image">Foto de perfil</label>
-        <input type="file" class="form-control-file" id="image" name="image" >
+        <label for="image" style="color: white;">Foto de perfil</label>
+        <input type="file" class="form-control-file" style="color: white;" id="image" name="image">
     </div>
 
     @endif

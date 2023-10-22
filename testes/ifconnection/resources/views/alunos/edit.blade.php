@@ -10,14 +10,14 @@
     @method('PUT')
 
     <div class="form-group">
-        <label for="image">Foto de perfil</label>
-        <input type="file" class="form-control-file" id="image" name="image" >
+        <label for="image" style="color: white;">Foto de perfil</label>
+        <input type="file" class="form-control-file" style="color: white;" id="image" name="image">
     </div>
 
-        <div class="d-flex justify-content-between mt-4">
-        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-        </div>
-    </form>
+    <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-primary" >Salvar Alterações</button>
+    </div>
+</form>
 
 
 @endsection

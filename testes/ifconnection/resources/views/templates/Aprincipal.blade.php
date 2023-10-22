@@ -51,7 +51,7 @@
         }
 
         body {
-            background-image: url('css/fotoWallpaper.jpg');
+            background-image: url('{{ asset('css/fotoWallpaper.jpg') }}');
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
@@ -67,7 +67,7 @@
             <div class="container-fluid">
                 
                 
-                <img src="css/ifprLogo.png" style="width: 290px; height: 80px;">
+                <img src="{{ asset('css/ifprLogo.png') }}" style="width: 290px; height: 80px;">
                 
                 
                 <span class="gray-box">
@@ -78,14 +78,14 @@
                             <div class="profile-image-container">
                                 @if (!empty(Auth::user()->image))
                                     <div class="image-container">
-                                        <img src="{{ Auth::user()->image }}" style="width: 60px; height: 58px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" alt="Foto de Perfil" class="profile-image">
+                                        <img src="{{ asset (Auth::user()->image)}}" style="width: 60px; height: 58px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" alt="Foto de Perfil" class="profile-image">
                                         <a href="{{ route('alunos.edit', ['aluno' => Auth::user()]) }}" class="edit-link">
                                             <div class="edit-button">Editar foto</div>
                                         </a>
                                         
                                     </div>
                                 @else
-                                    <img src="css/semFotoPerfil.png" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" alt="Foto de Perfil" class="profile-image">
+                                    <img src="{{ asset ('css/semFotoPerfil.png') }}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" alt="Foto de Perfil" class="profile-image">
                                 @endif
                             </div>
 
