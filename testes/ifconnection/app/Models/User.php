@@ -48,4 +48,9 @@ class User extends Authenticatable
     public function projetos()  {
         return $this-> hasOne('\App\Models\User');
     }
+
+    public function materias()
+    {
+    return $this->belongsToMany(Materia::class, 'materias_professor', 'user_id', 'materia_id');
+    }
 }

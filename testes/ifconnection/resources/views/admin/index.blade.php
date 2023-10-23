@@ -14,7 +14,7 @@
     
     <!-- Adicione o botão para a rota de registro -->
     <a href="{{ route('admin.create') }}" class="btn btn-primary">Criar Usuário</a>
-    <a href="{{ route('materias.create') }}" class="btn btn-primary">Adicionar matérias</a>
+    
 
     <table class="table">
         <thead>
@@ -22,9 +22,8 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Email</th>
-                <th>Status</th> <!-- Nova coluna para exibir o status -->
-                <th>Ações</th> <!-- Nova coluna para exibir os botões de ativação/desativação -->
-                <!-- Adicione outras colunas conforme necessário -->
+                <th>Status</th> 
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -48,8 +47,11 @@
                                 <button type="submit" class="btn btn-success">Ativar</button>
                             </form>
                         @endif
+
+                        
                     </td>
-                    <!-- Adicione outras colunas conforme necessário -->
+                    
+                    
                 </tr>
             @endforeach
         </tbody>

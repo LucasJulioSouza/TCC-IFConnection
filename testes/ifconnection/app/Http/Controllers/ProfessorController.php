@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Projeto;
+use App\Models\materias_professor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +15,10 @@ class ProfessorController extends Controller
     {
         
         $user = Auth::user();
+        $materiasDoProfessor = $user->materias;
 
-        return view('professores.index', compact(['user']));
+
+        return view('professores.index', compact(['user', 'materiasDoProfessor']));
     }
 
    

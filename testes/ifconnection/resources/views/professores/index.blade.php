@@ -15,11 +15,13 @@
             
         </div>
         <div class="card-header">
+           
             @if (!empty($user->image))
                 <img src="{{ $user->image }}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" >
             @else
                 <img src="img/profile/semFotoPerfil.png" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" >
             @endif
+            
         </div>
         <div class="card-body">
             <p><strong>Nome:</strong> {{ $user->name }}</p>
@@ -30,6 +32,21 @@
             @else
                 <p>Cadastre o link do seu Lattes!</p>
             @endif
+
+            @if (!empty($materiasDoProfessor))
+        <p><strong>Matérias:</strong> 
+            @foreach ($materiasDoProfessor as $materia)
+                {{ $materia->nome }}
+                @if (!$loop->last) <!-- Adiciona vírgula se não for o último elemento -->
+                    ,
+                @endif
+            @endforeach
+        </p>
+    @else
+        <p>Ainda não tem matérias cadastradas!</p>
+    @endif
+
+            
         </div>
 
         <div class="card-footer">
@@ -39,6 +56,8 @@
             @else
                 <a href="{{ route('professores.create') }}" class="btn btn-primary">Cadastrar Lattes e foto</a>
             @endif
+            <td><a href="{{ route('materiasProfessor.create') }}" class="btn btn-primary">Vincular matérias</a></td>
+            <td><a href="{{ route('materiasProfessor.edit', ['userId' => $user->id]) }}" class="btn btn-primary">Editar Matérias</a></td>
         </div>
     </div>
 </div>

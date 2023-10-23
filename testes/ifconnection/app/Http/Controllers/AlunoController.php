@@ -19,6 +19,8 @@ class AlunoController extends Controller
 
         $users= User::all(); 
 
+        $users->load('materias');
+
         return view('alunos.index', compact(['users']));
     }
 

@@ -61,7 +61,7 @@
             <div class="container-fluid">
                 
                 
-                <img src="{{ asset('css/ifLogoAdmin.png') }}" style="width: 180px; height: 80px;">
+                <img src="{{ asset('css/ifLogoAdmin.png') }}" style="width: 120px; height: 80px;">
                 
                 
                 <span class="gray-box">
@@ -125,7 +125,7 @@
                     <h3 class="display-7 text-white d-none d-md-block"><b>{{ $titulo }}</b></h3>
                 </div>
             </div>
-            <hr>
+            
             @yield('conteudo')
         </div>
         <nav class="navbar fixed-bottom navbar-dark bg-dark">

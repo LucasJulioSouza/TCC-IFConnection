@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\materias;
+use App\Models\Materia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class MateriasController extends Controller
+class MateriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,9 @@ class MateriasController extends Controller
      */
     public function index()
     {
-        return view('materias.index');
+        $materias = Materia::all();
+        
+        return view('materias.index', compact(['materias']));
     }
 
     /**
@@ -43,7 +45,7 @@ class MateriasController extends Controller
     ]);
 
     // Crie uma nova instância da matéria
-    $materia = new materias;
+    $materia = new Materia;
 
     // Preencha os campos da matéria com base nos dados do formulário
     $materia->nome = $request->input('nome'); // Substitua 'nome' pelo nome do campo no seu formulário
@@ -61,7 +63,7 @@ class MateriasController extends Controller
      * @param  \App\Models\create_materias_table  $create_materias_table
      * @return \Illuminate\Http\Response
      */
-    public function show(materias $materias)
+    public function show(Materia $materias)
     {
         //
     }
@@ -72,7 +74,7 @@ class MateriasController extends Controller
      * @param  \App\Models\create_materias_table  $create_materias_table
      * @return \Illuminate\Http\Response
      */
-    public function edit(materias $materias)
+    public function edit(Materia $materias)
     {
         //
     }
@@ -84,7 +86,7 @@ class MateriasController extends Controller
      * @param  \App\Models\create_materias_table  $create_materias_table
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, materias $materias)
+    public function update(Request $request, Materia $materias)
     {
         //
     }
@@ -95,7 +97,7 @@ class MateriasController extends Controller
      * @param  \App\Models\create_materias_table  $create_materias_table
      * @return \Illuminate\Http\Response
      */
-    public function destroy(materias $materias)
+    public function destroy(Materia $materias)
     {
         //
     }
