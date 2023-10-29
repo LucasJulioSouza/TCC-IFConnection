@@ -14,6 +14,7 @@
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Cadastrar</button>
+            <a href="{{ route('materias.index') }}" class="btn btn-secondary">Voltar</a>
         </div>
     </form>
 @endsection

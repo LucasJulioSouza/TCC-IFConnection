@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Aluno;
 use App\Models\User;
+use App\Models\Orientacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,10 +19,11 @@ class AlunoController extends Controller
     {
 
         $users= User::all(); 
+        $orientacao= Orientacao::all();
 
         $users->load('materias');
 
-        return view('alunos.index', compact(['users']));
+        return view('alunos.index', compact(['users','orientacao']));
     }
 
     /**

@@ -10,9 +10,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/orientacao', function () {
-    
-})->middleware('blockAccess');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
@@ -37,7 +34,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('projetos', 'ProjetoController');
     Route::resource('alunos', 'AlunoController');
-    Route::resource('orientacao', 'OrientacaoController');
+    Route::resource('orientacoes', 'OrientacaoController');
+    Route::get('/orientacoes/create/{professorId}', 'OrientacaoController@create')->name('orientacoes.create');
+    Route::get('/orientacoes/solicitacoes', 'OrientacaoController@solicitacoes')->name('orientacao.solicitacoes');
+    
     
     
 

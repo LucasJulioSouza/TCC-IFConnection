@@ -66,11 +66,11 @@
     </div>
 
 
+   
+    @endif
     <div class="mt-4">
         <a href="{{ route('projetos.create') }}" class="btn btn-success">Adicionar projeto</a>
     </div>
-    @endif
-        
     @endif
 
     

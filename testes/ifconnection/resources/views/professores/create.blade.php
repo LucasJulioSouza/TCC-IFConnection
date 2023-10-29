@@ -20,6 +20,7 @@
 
 
         <div class="form-group">
+            <a href="{{ route('professores.index') }}" class="btn btn-secondary">Voltar</a>
             <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Cadastrar</button>
         </div>
     </form>

@@ -102,11 +102,10 @@
                                     @if ( Auth::user()->type_id === 1)
                                         <a href="{{route('professores.index')}}" class="dropdown-item">Perfil</a>
                                         <a href="{{route('projetos.index')}}" class="dropdown-item">Projetos</a>
-
+                                        <a href="{{route('orientacao.solicitacoes')}}" class="dropdown-item">Solicitações de Orientação</a>
                                     @else
                                         <li><a href="{{route('alunos.index')}}" class="dropdown-item">Principal</a></li>
                                         <li><a href="{{route('projetos.index')}}" class="dropdown-item">Projetos</a></li>
-                                        <li><a href="{{route('orientacao.index')}}" class="dropdown-item">Orientação</a></li>
                                     @endif
                                 </ul>
                             </li>

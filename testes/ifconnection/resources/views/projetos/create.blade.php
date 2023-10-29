@@ -25,6 +25,7 @@
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Enviar</button>
+            <a href="{{ route('projetos.index') }}" class="btn btn-secondary">Voltar</a>
         </div>
     </form>
 @endsection

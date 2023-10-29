@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Projeto;
+use App\Models\Orientacao;
 
 class OrientacaoController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware("blockAccess");
-    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +18,7 @@ class OrientacaoController extends Controller
      */
     public function index()
     {
-        return view('orientacao.index');
+        return view('orientacoes.index');
     }
 
     /**
@@ -26,9 +26,12 @@ class OrientacaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($professorId)
     {
-        //
+        $nomeDoProfessor = User::find($professorId)->name;
+        $projetos = Projeto::where('user_id', auth()->user()->id)->get(); // Obtém os projetos do aluno logado
+
+        return view('orientacoes.create', compact('nomeDoProfessor', 'projetos', 'professorId'));
     }
 
     /**
@@ -39,7 +42,16 @@ class OrientacaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $orientacao = new Orientacao();
+        $orientacao->professor_id = $request->input('professor_id'); 
+        $orientacao->aluno_id = auth()->user()->id; 
+        $orientacao->projeto_id = $request->input('projeto');
+        
+
+        $orientacao->save();
+
+        
+        return redirect()->route('alunos.index');
     }
 
     /**
@@ -86,4 +98,14 @@ class OrientacaoController extends Controller
     {
         //
     }
+
+    public function solicitacoes(){
+    $userId = auth()->id();
+
+    
+    $solicitacoes = Orientacao::where('professor_id', $userId)->where('status', 'pendente')->get();
+
+    return view('orientacoes.solicitacoes',compact('solicitacoes'));
+    }
+
 }

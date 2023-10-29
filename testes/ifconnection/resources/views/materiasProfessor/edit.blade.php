@@ -38,6 +38,7 @@
         </table>
 
         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <a href="{{ route('professores.index') }}" class="btn btn-secondary">Voltar</a>
     </form>
 </div>
 

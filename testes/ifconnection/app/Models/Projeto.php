@@ -11,7 +11,7 @@ class Projeto extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['titulo','resumo','aluno_id'];
+    protected $fillable = ['titulo','resumo','user_id'];
 
     public function user() {
         return $this->belongsTo('\App\Models\User');

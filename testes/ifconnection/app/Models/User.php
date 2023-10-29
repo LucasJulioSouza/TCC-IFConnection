@@ -53,4 +53,14 @@ class User extends Authenticatable
     {
     return $this->belongsToMany(Materia::class, 'materias_professor', 'user_id', 'materia_id');
     }
+
+    public function orientacoesComoProfessor()
+    {
+        return $this->hasMany(Orientacao::class, 'professor_id');
+    }
+
+    public function orientacoesComoAluno()
+    {
+        return $this->hasMany(Orientacao::class, 'aluno_id');
+    }
 }

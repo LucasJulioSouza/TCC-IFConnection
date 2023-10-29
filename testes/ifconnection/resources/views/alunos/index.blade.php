@@ -34,14 +34,31 @@
                         @foreach($user->materias as $materia)
                             {{ $materia->nome }}
                             @if (!$loop->last)
-                                , <!-- Adiciona vírgula se não for o último elemento -->
+                                , 
                             @endif
                         @endforeach
                         </p>
                     @else
                         <p> * materias ainda não disponíveis!</p>
                     @endif
-                    
+
+                    @php
+                            $orientacoesAceitas = $orientacao->where('professor_id', $user->id)->where('status', 'aceita')->count();
+                            $orientacoesPendentes = $orientacao->where('status', 'pendente')->count();
+
+                            $limiteOrientacoes = min($orientacoesAceitas, 5);
+                            $usuarioTemOrientacaoAceita = $orientacoesAceitas > 0;
+                            $usuarioTemOrientacaoPendente = $orientacoesPendentes > 0;
+                        @endphp
+
+                        <p><strong>Orientações:</strong> {{ $limiteOrientacoes }}/5</p>
+                        
+                        @if ($usuarioTemOrientacaoPendente)
+                            <p>Sua solicitação está em análise!!!</p>
+                        @elseif ($limiteOrientacoes < 5 && !$usuarioTemOrientacaoAceita)
+                            <a href="{{ route('orientacoes.create', ['professorId' => $user->id]) }}" class="btn btn-primary">Solicitar Orientação</a>
+                        @endif
+
                 </div>
             </div>
         </div>
