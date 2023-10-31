@@ -102,7 +102,7 @@
                                     @if ( Auth::user()->type_id === 1)
                                         <a href="{{route('professores.index')}}" class="dropdown-item">Perfil</a>
                                         <a href="{{route('projetos.index')}}" class="dropdown-item">Projetos</a>
-                                        <a href="{{route('orientacao.solicitacoes')}}" class="dropdown-item">Solicitações de Orientação</a>
+                                        <a href="{{route ('professores.solicitacoes')}}" class="dropdown-item">Solicitações de Orientação</a>
                                     @else
                                         <li><a href="{{route('alunos.index')}}" class="dropdown-item">Principal</a></li>
                                         <li><a href="{{route('projetos.index')}}" class="dropdown-item">Projetos</a></li>
@@ -117,7 +117,7 @@
                                             <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1h8zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                                         </svg>
                                         <span class="ps-1 text-dark">Sair</span>
-                                        
+
                                     </a>
                                 </form>
                             </li>

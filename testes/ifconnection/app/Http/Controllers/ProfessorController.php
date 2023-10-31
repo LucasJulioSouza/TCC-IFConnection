@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Projeto;
+use App\Models\Orientacao;
 use App\Models\materias_professor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -108,6 +109,16 @@ class ProfessorController extends Controller
 
     
         return view('professores.projetos', compact('projetos'));
+
+    }
+
+    public function solicitacoes(){
+    
+        $userId = auth()->id();
+    
+        $solicitacoes = Orientacao::all();
+
+        return view('professores.solicitacoes',compact('solicitacoes'));
 
     }
 
