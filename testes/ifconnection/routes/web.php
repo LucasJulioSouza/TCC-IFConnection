@@ -54,11 +54,16 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('professores', 'ProfessorController');
         Route::get('professores/edit/{id}', 'ProfessorController@edit')->name('professores.edit');
         Route::put('/professores/{id}', 'ProfessorController@update')->name('professores.update');
-        Route::get('/professores/projetos', 'ProfessorController@projetos')->name('professores.projetos');
-        Route::get('/professores/solicitacoes', 'ProfessorController@solicitacoes')->name('professores.solicitacoes');
+        
         Route::resource('materiasProfessor', 'MateriasProfessorController');
         Route::get('materiasProfessor/{userId}/edit', 'MateriasProfessorController@edit')->name('materiasProfessor.edit');
         Route::put('materiasProfessor/{userId}', 'MateriasProfessorController@update')->name('materiasProfessor.update');
+
+        Route::get('/orientacoes/solicitacoes', 'OrientacaoController@solicitacoes')->name('orientacoes.solicitacoes');
+
+        Route::get('/orientacoes/{orientacao}/edit', 'OrientacaoController@edit')->name('orientacoes.edit');
+        Route::put('/orientacoes/{orientacao}/aceitar', 'OrientacaoController@aceitar')->name('orientacoes.aceitar');
+        Route::put('/orientacoes/{orientacao}/recusar', 'OrientacaoController@recusar')->name('orientacoes.recusar');
     });
 });
 

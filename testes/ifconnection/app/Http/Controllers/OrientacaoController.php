@@ -18,6 +18,9 @@ class OrientacaoController extends Controller
      */
     public function index()
     {
+
+        
+
         return view('orientacoes.index');
     }
 
@@ -31,7 +34,7 @@ class OrientacaoController extends Controller
         $nomeDoProfessor = User::find($professorId)->name;
 
         $projetos = Projeto::where('user_id', auth()->user()->id)->get(); 
-        
+
         return view('orientacoes.create', compact('nomeDoProfessor', 'projetos', 'professorId'));
     }
 
@@ -63,7 +66,11 @@ class OrientacaoController extends Controller
      */
     public function show($id)
     {
-        //
+        $userId = auth()->id();
+    
+        $solicitacoes = Orientacao::where('professor_id', $userId)->where('status', 'pendente')->get();
+
+        return view('orientacoes.solicitacoes',compact('solicitacoes'));
     }
 
     /**
@@ -74,7 +81,7 @@ class OrientacaoController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -107,6 +114,28 @@ class OrientacaoController extends Controller
         $solicitacoes = Orientacao::where('professor_id', $userId)->where('status', 'pendente')->get();
 
         return view('orientacoes.solicitacoes',compact('solicitacoes'));
+    }
+
+    public function aceitar($orientacao){
+        
+        $solicitacao = Orientacao::find($orientacao);
+        $solicitacao->update(['status' => 'aceita']);
+        
+        
+
+        
+        return redirect()->route('professores.index')->with('success', 'Solicitação aceita com sucesso!');
+    
+    }
+
+    public function recusar($orientacao){
+
+        $solicitacao = Orientacao::find($orientacao);
+        $solicitacao->update(['status' => 'recusada']);
+
+        
+        return redirect()->route('professores.index')->with('success', 'Solicitação recusada com sucesso!');
+    
     }
 
 }

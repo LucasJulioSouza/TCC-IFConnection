@@ -17,13 +17,13 @@ class AlunoController extends Controller
      */
     public function index()
     {
-
+        $aluno= Auth::user();
         $users= User::all(); 
         $orientacao= Orientacao::all();
 
         $users->load('materias');
 
-        return view('alunos.index', compact(['users','orientacao']));
+        return view('alunos.index', compact(['users','orientacao','aluno']));
     }
 
     /**

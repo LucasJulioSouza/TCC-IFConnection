@@ -112,16 +112,7 @@ class ProfessorController extends Controller
 
     }
 
-    public function solicitacoes(){
     
-        $userId = auth()->id();
-    
-        $solicitacoes = Orientacao::all();
-
-        return view('professores.solicitacoes',compact('solicitacoes'));
-
-    }
-
 
     
     

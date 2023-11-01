@@ -43,21 +43,36 @@
                     @endif
 
                     @php
-                            $orientacoesAceitas = $orientacao->where('professor_id', $user->id)->where('status', 'aceita')->count();
-                            $orientacoesPendentes = $orientacao->where('status', 'pendente')->count();
-
-                            $limiteOrientacoes = min($orientacoesAceitas, 5);
-                            $usuarioTemOrientacaoAceita = $orientacoesAceitas > 0;
-                            $usuarioTemOrientacaoPendente = $orientacoesPendentes > 0;
-                        @endphp
-
-                        <p><strong>Orientações:</strong> {{ $limiteOrientacoes }}/5</p>
+                        $orientacoesProfessorAceitas = $orientacao->where('professor_id', $user->id)->where('status', 'aceita')->count();
                         
-                        @if ($usuarioTemOrientacaoPendente)
-                            <p>Sua solicitação está em análise!!!</p>
-                        @elseif ($limiteOrientacoes < 5 && !$usuarioTemOrientacaoAceita)
+                        $orientacoesAlunoAceitas = $orientacao->where('professor_id', $user->id)->where('aluno_id', $aluno->id)->where('status', 'aceita')->count();
+                        
+                        $orientacoesPendentes = $orientacao->where('aluno_id', $aluno->id)->where('status', 'pendente')->count();
+                        
+                        $orientacoesPendentesComProfessor = $orientacao->where('aluno_id', $aluno->id)->where('professor_id', $user->id)->where('status', 'pendente')->count();
+                        
+                        $limiteOrientacoes = min($orientacoesProfessorAceitas, 5);
+                        
+                        $usuarioTemOrientacaoAceita = $orientacoesAlunoAceitas > 0;
+                        
+                        $usuarioTemOrientacaoPendente = $orientacoesPendentes > 0;
+                    @endphp
+
+                    <p><strong>Orientações:</strong> {{ $limiteOrientacoes }}/5</p>
+
+                    @if ($usuarioTemOrientacaoPendente)
+                        
+                        <p>Sua solicitação está em análise!!!</p>
+
+                    @elseif ($limiteOrientacoes < 5 && !$usuarioTemOrientacaoAceita )
+                        
+                        @if ($aluno->type_id === 2)
+                            
                             <a href="{{ route('orientacoes.create', ['professorId' => $user->id]) }}" class="btn btn-primary">Solicitar Orientação</a>
                         @endif
+                    
+                    @endif
+
 
                 </div>
             </div>

@@ -30,4 +30,8 @@ class Orientacao extends Model
     {
         return $this->belongsTo(User::class, 'aluno_id');
     }
+
+    public function projeto() {
+        return $this->belongsTo(Projeto::class);
+    }
 }
