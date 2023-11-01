@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/orientacoes/solicitacoes', 'OrientacaoController@solicitacoes')->name('orientacoes.solicitacoes');
 
-        Route::get('/orientacoes/{orientacao}/edit', 'OrientacaoController@edit')->name('orientacoes.edit');
+    
         Route::put('/orientacoes/{orientacao}/aceitar', 'OrientacaoController@aceitar')->name('orientacoes.aceitar');
         Route::put('/orientacoes/{orientacao}/recusar', 'OrientacaoController@recusar')->name('orientacoes.recusar');
     });
