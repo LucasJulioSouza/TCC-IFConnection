@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('orientacoes', 'OrientacaoController');
     Route::get('/orientacoes/create/{professorId}', 'OrientacaoController@create')->name('orientacoes.create');
     Route::get('/orientacoes/solicitacoes', 'OrientacaoController@solicitacoes')->name('orientacoes.solicitacoes');
-    
+    Route::resource('gestao', 'GestaoController');
     
     
 

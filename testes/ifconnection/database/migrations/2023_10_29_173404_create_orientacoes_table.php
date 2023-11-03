@@ -8,7 +8,7 @@ class CreateOrientacoesTable extends Migration
 {
     public function up()
     {
-        Schema::create('orientacao', function (Blueprint $table) {
+        Schema::create('orientacoes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('professor_id');
             $table->foreign('professor_id')->references('id')->on('users');

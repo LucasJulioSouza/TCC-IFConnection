@@ -47,9 +47,13 @@
                         
                         $orientacoesAlunoAceitas = $orientacao->where('professor_id', $user->id)->where('aluno_id', $aluno->id)->where('status', 'aceita')->count();
                         
+                        $orientacoesAlunoAceitas = $orientacao->where('aluno_id', $aluno->id)->where('status', 'aceita')->count();
+
                         $orientacoesPendentes = $orientacao->where('aluno_id', $aluno->id)->where('status', 'pendente')->count();
                         
                         $orientacoesPendentesComProfessor = $orientacao->where('aluno_id', $aluno->id)->where('professor_id', $user->id)->where('status', 'pendente')->count();
+                        
+                        
                         
                         $limiteOrientacoes = min($orientacoesProfessorAceitas, 5);
                         
@@ -64,11 +68,16 @@
                         
                         <p>Sua solicitação está em análise!!!</p>
 
-                    @elseif ($limiteOrientacoes < 5 && !$usuarioTemOrientacaoAceita )
-                        
-                        @if ($aluno->type_id === 2)
+                    @else
+                    
+                        @if ($limiteOrientacoes < 5 && !$usuarioTemOrientacaoAceita)
                             
-                            <a href="{{ route('orientacoes.create', ['professorId' => $user->id]) }}" class="btn btn-primary">Solicitar Orientação</a>
+                            @if ($aluno->type_id === 2)
+                        
+                                <a href="{{ route('orientacoes.create', ['professorId' => $user->id]) }}" class="btn btn-primary">Solicitar Orientação</a>
+                            
+                            @endif
+                        
                         @endif
                     
                     @endif

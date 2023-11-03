@@ -103,11 +103,12 @@
                                         <a href="{{route('professores.index')}}" class="dropdown-item">Perfil</a>
                                         <a href="{{route('projetos.index')}}" class="dropdown-item">Projetos</a>
 
-                                        <a href="{{ route('orientacoes.solicitacoes') }}" class="dropdown-item">Solicitações de Orientação</a>
+                                       
                                     
                                     @else
                                         <li><a href="{{route('alunos.index')}}" class="dropdown-item">Principal</a></li>
                                         <li><a href="{{route('projetos.index')}}" class="dropdown-item">Projetos</a></li>
+                                        <td><a href="{{ route('gestao.index') }}" class="dropdown-item">Gestão TCC</a></td>
                                     @endif
                                 </ul>
                             </li>

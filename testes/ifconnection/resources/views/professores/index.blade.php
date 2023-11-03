@@ -34,17 +34,18 @@
             @endif
 
             @if (!empty($materiasDoProfessor))
-        <p><strong>Matérias:</strong> 
+            <p><strong>Matérias:</strong> 
+            
             @foreach ($materiasDoProfessor as $materia)
                 {{ $materia->nome }}
-                @if (!$loop->last) <!-- Adiciona vírgula se não for o último elemento -->
+                @if (!$loop->last)
                     ,
                 @endif
             @endforeach
-        </p>
-    @else
-        <p>Ainda não tem matérias cadastradas!</p>
-    @endif
+            </p>
+            @else
+                <p>Ainda não tem matérias cadastradas!</p>
+            @endif
 
             
         </div>
@@ -58,6 +59,8 @@
             @endif
             <td><a href="{{ route('materiasProfessor.create') }}" class="btn btn-primary">Vincular matérias</a></td>
             <td><a href="{{ route('materiasProfessor.edit', ['userId' => $user->id]) }}" class="btn btn-primary">Editar Matérias</a></td>
+            <td><a href="{{ route('orientacoes.solicitacoes') }}" class="btn btn-warning">Solicitações de orientação</a></td>
+            <td><a href="{{ route('gestao.index') }}" class="btn btn-warning">gestão</a></td>
         </div>
     </div>
 </div>
