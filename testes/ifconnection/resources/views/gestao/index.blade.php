@@ -14,6 +14,9 @@
                         <p class="card-text">descrição: {{ $orientacao->projeto->resumo }}</p>
                        
                     </div>
+                        <a href="{{ route('gestao.documento', ['id' => $orientacao->id]) }}">Acesso a Documentos</a>
+                        <a href="{{ route('gestao.reuniao', ['id' => $orientacao->id]) }}">Reuniões</a>
+                        <a href="{{ route('gestao.cronograma', ['id' => $orientacao->id]) }}">Cronograma</a>
                 </div>
             </div>
         @endforeach

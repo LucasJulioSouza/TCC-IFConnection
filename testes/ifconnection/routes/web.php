@@ -34,12 +34,19 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('projetos', 'ProjetoController');
     Route::resource('alunos', 'AlunoController');
+    
     Route::resource('orientacoes', 'OrientacaoController');
     Route::get('/orientacoes/create/{professorId}', 'OrientacaoController@create')->name('orientacoes.create');
-    Route::get('/orientacoes/solicitacoes', 'OrientacaoController@solicitacoes')->name('orientacoes.solicitacoes');
+    
     Route::resource('gestao', 'GestaoController');
+    Route::get('gestao/{id}/documento', 'GestaoController@documentoIndex')->name('gestao.documento');
+    Route::get('gestao/{id}/reuniao', 'GestaoController@reuniaoIndex')->name('gestao.reuniao');
+    Route::get('gestao/{id}/cronograma', 'GestaoController@CronogramaIndex')->name('gestao.cronograma');
     
-    
+    Route::get('/download/{id}', 'GestaoController@download')->name('documento.download');
+    Route::get('/documento/cadastrar/{id}', 'GestaoController@cadastrarDocumento')->name('documento.cadastrar');
+    Route::post('/documento/salvar', 'GestaoController@salvarDocumento')->name('documento.salvar');
+
 
     Route::middleware(['custom-auth-admin'])->group(function () {
         Route::resource('admin', 'AdminController');
@@ -60,8 +67,6 @@ Route::middleware(['auth'])->group(function () {
         Route::put('materiasProfessor/{userId}', 'MateriasProfessorController@update')->name('materiasProfessor.update');
 
         Route::get('/orientacoes/solicitacoes', 'OrientacaoController@solicitacoes')->name('orientacoes.solicitacoes');
-
-    
         Route::put('/orientacoes/{orientacao}/aceitar', 'OrientacaoController@aceitar')->name('orientacoes.aceitar');
         Route::put('/orientacoes/{orientacao}/recusar', 'OrientacaoController@recusar')->name('orientacoes.recusar');
     });

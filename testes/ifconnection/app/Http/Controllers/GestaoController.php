@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Orientacao;
 use App\Models\User;
+use App\Models\Documento;
+use App\Models\Reuniao;
+use App\Models\Cronograma;
 
 class GestaoController extends Controller
 {
@@ -92,6 +95,72 @@ class GestaoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
+
+    public function documentoIndex($id) {
+        $documentos = Documento::where('orientacao_id', $id)->get();
+        return view('gestao.documento', compact('id', 'documentos'));
+    }
+
+
+
+    public function cadastrarDocumento($id){
+    
+        return view('gestao.cadastrarDocumento', compact('id'));
+    
+    }
+
+    public function salvarDocumento(Request $request){
+    
+        $request->validate([
+            'nome' => 'required',
+            'descricao' => 'required',
+            'documento' => 'required|mimes:pdf,doc,docx|max:2048', 
+        ]);
+
+    
+        $documento = new Documento();
+        $documento->nome = $request->nome;
+        $documento->descricao = $request->descricao;
+        $documento->orientacao_id = $request->orientacao_id;
+
+        if ($request->hasFile('documento')) {
+            $documentoArquivo = $request->file('documento');
+            $nomeArquivo = time() . '_' . $documentoArquivo->getClientOriginalName();
+            $caminho = $documentoArquivo->storeAs('documentos', $nomeArquivo);
+            $documento->documento = $caminho;
+        }
+
+        $documento->save();
+
+        return redirect()->route('gestao.documento', ['id' => $request->orientacao_id]);
+
+    }
+
+
+    
+    public function download($id){
+        $documento = Documento::find($id);
+
+        $pathToFile = storage_path('app/' . $documento->documento);
+        $nomeDoArquivo = $documento->nome_do_documento; 
+
+        return response()->download($pathToFile, $nomeDoArquivo);
+    }
+
+
+    
+    public function reuniaoIndex($id)
+    {
+        return view('gestao.reuniao',compact('id'));
+    }
+
+    public function CronogramaIndex($id)
+    {
+        return view('gestao.cronograma',  compact('id'));
+    }
+
+
+
 }
