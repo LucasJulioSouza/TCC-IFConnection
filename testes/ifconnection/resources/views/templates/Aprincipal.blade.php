@@ -79,13 +79,12 @@
                                 @if (!empty(Auth::user()->image))
                                     <div class="image-container">
                                         <img src="{{ asset (Auth::user()->image)}}" style="width: 60px; height: 58px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" alt="Foto de Perfil" class="profile-image">
-                                        <a href="{{ route('alunos.edit', ['aluno' => Auth::user()]) }}" class="edit-link">
-                                            <div class="edit-button">Editar foto</div>
-                                        </a>
+                                        
                                         
                                     </div>
                                 @else
                                     <img src="{{ asset ('css/semFotoPerfil.png') }}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid #000;" alt="Foto de Perfil" class="profile-image">
+                                    
                                 @endif
                             </div>
 
@@ -109,6 +108,7 @@
                                         <li><a href="{{route('alunos.index')}}" class="dropdown-item">Principal</a></li>
                                         <li><a href="{{route('projetos.index')}}" class="dropdown-item">Projetos</a></li>
                                         <td><a href="{{ route('gestao.index') }}" class="dropdown-item">Gestão TCC</a></td>
+                                        <td><a href="{{ route('alunos.edit', ['aluno' => Auth::user()]) }}" class="dropdown-item">Editar Foto de perfil</a></td>
                                     @endif
                                 </ul>
                             </li>
