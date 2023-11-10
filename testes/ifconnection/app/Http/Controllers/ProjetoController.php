@@ -56,7 +56,20 @@ class ProjetoController extends Controller
         $projeto = new Projeto();
         $projeto->titulo = $request->titulo;
         $projeto->resumo = $request->resumo;
-        $projeto->foto = $request->foto;
+
+
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->move(public_path('img/projeto'), $fileName); 
+    
+        
+            $projeto->foto = 'img/projeto/' . $fileName;
+        }
+
+
+
         $projeto->user()->associate($user);
         $projeto->save();
 
@@ -94,22 +107,43 @@ class ProjetoController extends Controller
      * @param  \App\Models\Projeto  $projeto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Projeto $projeto)
-    {
+    public function update(Request $request, $projetoId){
+        
         $request->validate([
-            'titulo' => 'required',
-            'resumo' => 'required',
-            'foto' => 'required',
+            'titulo' => 'required|string|max:255',
+            'resumo' => 'required|string',
+            'foto'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ]);
-    
-        $projeto->update([
-            'titulo' => $request->titulo,
-            'resumo' => $request->resumo,
-            'foto' => $request->foto,
-        ]);
-    
-        return redirect()->route('projetos.index')->with('success', 'Projeto atualizado com sucesso.');
+
+        $projeto = Projeto::findOrFail($projetoId);
+
+        $projeto->titulo = $request->input('titulo');
+        $projeto->resumo = $request->input('resumo');
+
+        if ($request->hasFile('foto')) {
+            // Apague a imagem antiga se ela existir
+            if ($projeto->foto) {
+                $oldImagePath = public_path($projeto->foto);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
+            $file = $request->file('foto');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->move(public_path('img/projeto'), $fileName); // Salve a foto na pasta 'img/projeto'
+
+            // Atualize o caminho da foto no banco de dados
+            $projeto->foto = 'img/projeto/' . $fileName;
+        }
+
+        // Salvar as alterações no banco de dados
+        $projeto->save();
+
+        // Redirecionar de volta à página de índice ou qualquer outra rota desejada
+        return redirect()->route('projetos.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -126,5 +160,39 @@ class ProjetoController extends Controller
         $obj->destroy($id);
 
         return redirect()->route('projetos.index');
+    }
+
+
+
+    public function cadastrarProjeto(Request $request)
+    {
+         
+        $request->validate([
+        'titulo' => 'required',
+        'resumo' => 'required',
+        'foto'=> 'required'
+        ]);
+
+    
+        $userId = Auth::id();
+        $user = User::find($userId);
+    
+        $projeto = new Projeto();
+        $projeto->titulo = $request->titulo;
+        $projeto->resumo = $request->resumo;
+
+
+
+        if ($request->hasFile('foto')) {
+            $fotoPath = $request->file('foto')->store('projetos/fotos', 'public');
+            $projeto->foto = $fotoPath;
+        }
+
+
+        $projeto->user()->associate($user);
+        $projeto->save();
+
+        return redirect()->route('projetos.index');
+
     }
 }

@@ -21,12 +21,12 @@ class GestaoController extends Controller
     {
         $userId = auth()->id();
         $typeUserId = User::where('id', $userId)->value('type_id');
-        $orientacoes = collect();
+        
 
         if ($typeUserId === 1) {
-            $orientacoes = Orientacao::where('professor_id', $userId)->get();
+            $orientacoes = Orientacao::where('professor_id', $userId)->where('status', 'aceita')->get();
         } elseif ($typeUserId === 2) {
-            $orientacoes = Orientacao::where('aluno_id', $userId)->get();
+            $orientacoes = Orientacao::where('aluno_id', $userId)->where('status', 'aceita')->get();
         }
 
     return view('gestao.index', compact('orientacoes', 'typeUserId'));

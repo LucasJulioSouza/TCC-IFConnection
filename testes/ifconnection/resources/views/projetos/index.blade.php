@@ -46,7 +46,9 @@
             @if($projeto->user_id == auth()->user()->id)
                 <div class="col-md-4">
                     <div class="card" style="width: 18rem;">
-                        <img src="{{ $projeto->foto }}" class="card-img-top" >
+                        @if ($projeto->foto)
+                            <img src="{{ asset($projeto->foto) }}" alt="Foto do Projeto">
+                        @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $projeto->titulo }}</h5>
                             <p class="card-text">{{ $projeto->resumo }}</p>

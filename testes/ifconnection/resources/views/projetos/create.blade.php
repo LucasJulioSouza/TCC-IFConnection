@@ -5,8 +5,8 @@
 @endsection
 
 @section('conteudo')
-    <form action="{{ route('projetos.store') }}" method="POST">
-        @csrf
+    <form action="{{ route('projetos.store') }}" method="post" enctype="multipart/form-data">
+    @csrf
 
         <div class="form-group">
             <label for="titulo">Título:</label>
@@ -19,13 +19,13 @@
         </div>
 
         <div class="form-group">
-            <label for="resumo">foto:</label>
-            <textarea class="form-control" id="foto" name="foto" rows="3" placeholder="Digite a URL da foto"></textarea>
+            <label for="image" style="color: white;">Foto de capa</label>
+            <input type="file" class="form-control-file" style="color: white;" id="foto" name="foto">
         </div>
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Enviar</button>
-            <a href="{{ route('projetos.index') }}" class="btn btn-secondary">Voltar</a>
+            <a href="{{ route('projetos.store') }}" class="btn btn-secondary">Voltar</a>
         </div>
     </form>
 @endsection

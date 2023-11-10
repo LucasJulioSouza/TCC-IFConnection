@@ -17,6 +17,7 @@ class Orientacao extends Model
         'professor_id',
         'aluno_id',
         'status',
+        'projeto_id',
         
     ];
 
@@ -32,6 +33,6 @@ class Orientacao extends Model
     }
 
     public function projeto() {
-        return $this->belongsTo(Projeto::class);
+        return $this->belongsTo(Projeto::class, 'projeto_id');
     }
 }

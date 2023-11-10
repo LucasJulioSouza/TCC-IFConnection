@@ -11,7 +11,7 @@
                     <div class="card" style="margin-bottom: 20px;">
                         <div class="card-body">
                             
-                            <img src="{{ $solicitacao->projeto->foto }}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" >
+                            <img src="{{ asset($solicitacao->projeto->foto) }}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" >
                             <h5 class="card-title">Projeto: {{ $solicitacao->projeto->titulo }}</h5>
                             <p class="card-text">Solicitante: {{ $solicitacao->aluno->name }}</p>
                             

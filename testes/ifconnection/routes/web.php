@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::resource('projetos', 'ProjetoController');
+    Route::post('/projetos', 'ProjetoController@store')->name('projetos.store');
+    
     Route::resource('alunos', 'AlunoController');
     
     Route::resource('orientacoes', 'OrientacaoController');
