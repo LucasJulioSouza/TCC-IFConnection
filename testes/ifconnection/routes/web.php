@@ -49,6 +49,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/documento/cadastrar/{id}', 'GestaoController@cadastrarDocumento')->name('documento.cadastrar');
     Route::post('/documento/salvar', 'GestaoController@salvarDocumento')->name('documento.salvar');
 
+    Route::get('/reuniao/cadastrar/{id}', 'GestaoController@cadastrarReuniao')->name('reuniao.cadastrar');
+    Route::post('/reuniao/salvar', 'GestaoController@salvarReuniao')->name('reuniao.salvar');
+    Route::get('/reunioes/cadastrar-ata/{id}', 'GestaoController@cadastrarAta')->name('reuniao.cadastrarAta');
+    Route::post('reunioes/salvar-ata/{reuniao}', 'GestaoController@salvarAta')->name('reuniao.salvar-ata');
 
     Route::middleware(['custom-auth-admin'])->group(function () {
         Route::resource('admin', 'AdminController');

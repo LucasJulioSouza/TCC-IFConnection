@@ -8,6 +8,7 @@ use App\Models\Orientacao;
 use App\Models\User;
 use App\Models\Documento;
 use App\Models\Reuniao;
+use Illuminate\Database\Eloquent\Collection;
 use App\Models\Cronograma;
 
 class GestaoController extends Controller
@@ -105,6 +106,7 @@ class GestaoController extends Controller
 
 
 
+
     public function cadastrarDocumento($id){
     
         return view('gestao.cadastrarDocumento', compact('id'));
@@ -153,8 +155,70 @@ class GestaoController extends Controller
     
     public function reuniaoIndex($id)
     {
-        return view('gestao.reuniao',compact('id'));
+
+        $reunioes = Reuniao::where('orientacao_id', $id)->get();
+        return view('gestao.reuniao',compact('id','reunioes'));
     }
+
+
+    public function cadastrarReuniao($id){
+    
+        return view('gestao.cadastrarReuniao', compact('id'));
+    
+    }
+
+    public function salvarReuniao(Request $request){
+    
+        $request->validate([
+            'tema' => 'required',
+            'link' => 'required|url',
+            'data' => 'required|date',
+        ]);
+
+    
+        $reuniao = new Reuniao([
+            'tema' => $request->input('tema'),
+            'link' => $request->input('link'),
+            'data' => $request->input('data'),
+            'orientacao_id' => $request->input('orientacao_id'),
+        ]);
+
+        
+
+        $reuniao->save();
+
+        return redirect()->route('gestao.reuniao', ['id' => $request->orientacao_id]);
+
+    }
+
+    public function cadastrarAta($id){
+
+        return view('gestao.cadastrarAta', compact('id'));
+    }
+
+    public function salvarAta(Request $request, $reuniao){
+    
+        $request->validate([
+    
+            'ata' => 'required|string',
+    
+        ]);
+
+        $reuniaoUpdate = Reuniao::find($reuniao);
+        $reuniaoUpdate->update([
+
+            'ata' => $request->input('ata'),
+    
+        ]);
+
+        $reuniaoUpdate->save();
+
+    
+        return redirect()->route('gestao.reuniao', ['id' => $reuniaoUpdate->orientacao_id]);
+    }
+
+
+
 
     public function CronogramaIndex($id)
     {

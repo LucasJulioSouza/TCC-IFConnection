@@ -1,6 +1,6 @@
 @extends('templates.Aprincipal', ['titulo' => 'Documentos'])
 
-@section('titulo') {{ $id }} @endsection
+@section('titulo') Documentos TCC  @endsection
 
 @section('conteudo')
 
