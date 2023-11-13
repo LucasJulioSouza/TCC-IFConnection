@@ -63,10 +63,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Orientacao::class, 'aluno_id');
     }
-    
+
     public function orientacoesProjeto()
     {
         return $this->hasMany(Orientacao::class, 'projeto_id');
     }
+    
+    
 
 }
