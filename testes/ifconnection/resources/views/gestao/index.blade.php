@@ -6,17 +6,18 @@
         @foreach ($orientacoes as $orientacao)
             <div class="col-md-4 mb-4">
                 <div class="card">
+                    <img src="{{ asset($orientacao->projeto->foto) }}" class="card-img-top" alt="{{ $orientacao->projeto->titulo }}">
                     <div class="card-body">
-                        <img src="{{ asset($orientacao->projeto->foto) }}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" >
                         <h5 class="card-title">Orientador: {{ $orientacao->professor->name }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Aluno: {{ $orientacao->aluno->name }}</h6>
-                        <p class="card-text">Projeto: {{ $orientacao->projeto->titulo }}</p>
-                        <p class="card-text">descrição: {{ $orientacao->projeto->resumo }}</p>
-                       
+                        <p class="card-text"><strong>Projeto:</strong> {{ $orientacao->projeto->titulo }}</p>
+                        <p class="card-text"><strong>Descrição:</strong> {{ $orientacao->projeto->resumo }}</p>
                     </div>
-                        <a href="{{ route('gestao.documento', ['id' => $orientacao->id]) }}">Acesso a Documentos</a>
-                        <a href="{{ route('gestao.reuniao', ['id' => $orientacao->id]) }}">Reuniões</a>
-                        <a href="{{ route('gestao.cronograma', ['id' => $orientacao->id]) }}">Cronograma</a>
+                    <div class="card-footer">
+                        <a href="{{ route('gestao.documento', ['id' => $orientacao->id]) }}" class="btn btn-primary btn-block">Documentos</a>
+                        <a href="{{ route('gestao.reuniao', ['id' => $orientacao->id]) }}" class="btn btn-secondary btn-block">Reuniões</a>
+                        <a href="{{ route('gestao.cronograma', ['id' => $orientacao->id]) }}" class="btn btn-info btn-block">Cronograma</a>
+                    </div>
                 </div>
             </div>
         @endforeach
