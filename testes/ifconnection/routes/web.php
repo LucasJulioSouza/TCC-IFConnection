@@ -54,6 +54,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reunioes/cadastrar-ata/{id}', 'GestaoController@cadastrarAta')->name('reuniao.cadastrarAta');
     Route::post('reunioes/salvar-ata/{reuniao}', 'GestaoController@salvarAta')->name('reuniao.salvar-ata');
 
+    Route::get('/gestao/cronograma/{id}', 'GestaoController@cronogramaIndex')->name('gestao.cronograma');
+    Route::get('/gestao/cronograma/cadastrar/{id}', 'GestaoController@cadastrarCronograma')->name('cronograma.cadastrar');
+    Route::post('/gestao/cronograma/salvar/{id}', 'GestaoController@salvarCronograma')->name('cronograma.salvar');
+    Route::get('/gestao/cronograma/editar/{id}', 'GestaoController@editarCronograma')->name('cronograma.editar');
+    Route::put('/gestao/cronograma/atualizar/{id}', 'GestaoController@atualizarCronograma')->name('cronograma.atualizar');
+    Route::delete('/gestao/cronograma/excluir/{id}/{cronogramaId}', 'GestaoController@excluirCronograma')->name('cronograma.excluir');
+
+
     Route::middleware(['custom-auth-admin'])->group(function () {
         Route::resource('admin', 'AdminController');
         Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
