@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Projeto;
 use App\Models\User;
+use App\Models\Orientacao;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +19,9 @@ class ProjetoController extends Controller
     public function index()
     {
         $projetos = Projeto::with('user')->get();
+        $orientacoes = Orientacao::all();
 
-        return view('projetos.index',compact(['projetos']));
+        return view('projetos.index',compact(['projetos','orientacoes']));
     }
 
     /**

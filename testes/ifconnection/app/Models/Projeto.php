@@ -17,7 +17,7 @@ class Projeto extends Model
         return $this->belongsTo('\App\Models\User');
     }
 
-    public function orientacao()
+    public function projeto()
     {
         return $this->hasOne(Orientacao::class, 'projeto_id');
     }

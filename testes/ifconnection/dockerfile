@@ -1,0 +1,34 @@
+# Use a imagem base do PHP 8.0 com FPM
+FROM php:8.1-fpm
+
+# Atualize os pacotes e instale dependências
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libxml2-dev \
+    zlib1g-dev \
+    libzip-dev \
+    git \
+    curl
+
+# Instale o Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Instale extensões PHP necessárias
+RUN docker-php-ext-install pdo_mysql
+
+
+# Configure o diretório de trabalho para /app
+WORKDIR /app
+
+# Copie os arquivos de configuração do Composer separadamente para evitar cache desnecessário
+COPY composer.json composer.lock /app/
+
+
+# Instale as dependências do Composer (sem scripts)
+RUN composer install 
+
+# Copie o restante do aplicativo para o diretório de trabalho
+COPY . /app/
+
+# Comando padrão para iniciar o servidor PHP
+CMD php artisan serve --host=0.0.0.0 --port=80

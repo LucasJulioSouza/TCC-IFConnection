@@ -25,10 +25,11 @@ class GestaoController extends Controller
         
 
         if ($typeUserId === 1) {
-            $orientacoes = Orientacao::where('professor_id', $userId)->where('status', 'aceita')->get();
+            $orientacoes = Orientacao::with('projeto')->where('professor_id', $userId)->where('status', 'aceita')->get();
         } elseif ($typeUserId === 2) {
-            $orientacoes = Orientacao::where('aluno_id', $userId)->where('status', 'aceita')->get();
+            $orientacoes = Orientacao::with('projeto')->where('aluno_id', $userId)->where('status', 'aceita')->get();
         }
+        
 
     return view('gestao.index', compact('orientacoes', 'typeUserId'));
     }
