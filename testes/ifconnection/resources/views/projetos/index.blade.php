@@ -19,11 +19,11 @@
                             @endif
                             <p class="ml-3" style="margin-top: 15px; margin-left: 10px">{{ $projeto->user->name }}</p>
                         </div>
-                        <div class="card-body d-flex align-items-center"> 
+                        <div class="card-body d-flex align-items-center" style="min-height: 100px;"> 
                             <h3 class="card-title">{{ $projeto->titulo }}</h3>
                         </div>
-                        <img src="{{ $projeto->foto }}" class="card-img-top" alt="...">
-                        <div class="card-body">
+                        <img src="{{ $projeto->foto }}" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
+                        <div class="card-body" style="min-height: 100px;">
                             <h5 class="card-title">Descrição:</h5>
                             <p class="card-text">{{ $projeto->resumo }}</p>
                         </div>
@@ -41,9 +41,9 @@
                         <div class="col-md-4">
                             <div class="card" style="width: 18rem;">
                                 @if ($projeto->foto)
-                                    <img src="{{ asset($projeto->foto) }}" alt="Foto do Projeto">
+                                    <img src="{{ asset($projeto->foto) }}" alt="Foto do Projeto" style="object-fit: cover; height: 200px;">
                                 @endif
-                                <div class="card-body">
+                                <div class="card-body" style="min-height: 100px;">
                                     <h5 class="card-title">{{ $projeto->titulo }}</h5>
                                     <p class="card-text">{{ $projeto->resumo }}</p>
                                     <div class="d-flex justify-content-between">

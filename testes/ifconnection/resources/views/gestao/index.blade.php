@@ -1,4 +1,4 @@
-@extends('templates.Aprincipal', ['titulo' => ($typeUserId === 1) ? 'Trabalhos Orientados' : 'Trabalho de Conclusão de Curso'])
+@extends('templates.Aprincipal', ['titulo' => ($typeUserId === 1) ? 'Trabalhos Orientados' : 'Gestão TCC'])
 @section('titulo') Gestão TCC @endsection
 
 @section('conteudo')
