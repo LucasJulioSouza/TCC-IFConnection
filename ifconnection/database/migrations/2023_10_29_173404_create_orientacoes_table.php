@@ -14,7 +14,6 @@ class CreateOrientacoesTable extends Migration
             $table->foreign('professor_id')->references('id')->on('users');
             $table->unsignedBigInteger('aluno_id');
             $table->foreign('aluno_id')->references('id')->on('users');
-            $table->bigInteger('projeto_id')->unsigned()->nullable();
             $table->enum('status', ['pendente', 'aceita', 'recusada'])->default('pendente');
             $table->softDeletes();
             $table->timestamps();
