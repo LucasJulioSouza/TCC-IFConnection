@@ -17,7 +17,7 @@
             <thead>
                 <tr>
                     <th scope="col">Tarefa</th>
-                    <th scope="col">Data</th>
+                    <th scope="col">Data de entrega</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>

@@ -17,10 +17,10 @@
                         <strong>Data:</strong> {{ $reuniao->data }}
                     </div>
                     <div class="mb-2">
-                        <strong>ATA:</strong> {{ $reuniao->ata }}
+                        <strong>Temas discutidos:</strong> {{ $reuniao->ata }}
                     </div>
-                    
-                    <a href="{{ route('reuniao.cadastrarAta', ['id' => $reuniao->id]) }}" class="btn btn-primary">Cadastrar ATA</a>
+
+                    <a href="{{ route('reuniao.cadastrarAta', ['id' => $reuniao->id]) }}" class="btn btn-primary">Cadastrar tema</a>
                     <a href="{{ $reuniao->link }}" target="_blank" class="btn btn-secondary">Abrir Reunião</a>
                 </div>
             </div>

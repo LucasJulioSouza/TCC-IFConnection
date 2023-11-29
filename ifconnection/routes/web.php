@@ -22,11 +22,11 @@ Route::middleware(['auth'])->group(function () {
         }
 
         if ($userType === 1) {
-            return redirect()->route('professores.index'); 
+            return redirect()->route('professores.index');
         } elseif ($userType === 2) {
-            return redirect()->route('alunos.index'); 
+            return redirect()->route('alunos.index');
         } elseif ($userType === 3) {
-            return redirect()->route('admin.index'); 
+            return redirect()->route('admin.index');
         } else {
             return view('alunos.index')->with('titulo', "IFConnection");
         }
@@ -34,34 +34,39 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('projetos', 'ProjetoController');
     Route::post('/projetos', 'ProjetoController@store')->name('projetos.store');
-    
+
     Route::resource('alunos', 'AlunoController');
-    
+
     Route::resource('orientacoes', 'OrientacaoController');
     Route::get('/orientacoes/create/{professorId}', 'OrientacaoController@create')->name('orientacoes.create');
-    
+
     Route::resource('gestao', 'GestaoController');
-    Route::get('gestao/{id}/documento', 'GestaoController@documentoIndex')->name('gestao.documento');
-    Route::get('gestao/{id}/reuniao', 'GestaoController@reuniaoIndex')->name('gestao.reuniao');
-    Route::get('gestao/{id}/cronograma', 'GestaoController@CronogramaIndex')->name('gestao.cronograma');
-    
-    Route::get('/download/{id}', 'GestaoController@download')->name('documento.download');
-    Route::get('/documento/cadastrar/{id}', 'GestaoController@cadastrarDocumento')->name('documento.cadastrar');
-    Route::post('/documento/salvar', 'GestaoController@salvarDocumento')->name('documento.salvar');
-    Route::get('/documentos/novo-comentario/{id}', 'GestaoController@createComentario')->name('documento.novoComentario');
-    Route::post('/documentos/salvar-comentario/{id}','GestaoController@salvarComentario')->name('documento.salvarComentario');
 
-    Route::get('/reuniao/cadastrar/{id}', 'GestaoController@cadastrarReuniao')->name('reuniao.cadastrar');
-    Route::post('/reuniao/salvar', 'GestaoController@salvarReuniao')->name('reuniao.salvar');
-    Route::get('/reunioes/cadastrar-ata/{id}', 'GestaoController@cadastrarAta')->name('reuniao.cadastrarAta');
-    Route::post('reunioes/salvar-ata/{reuniao}', 'GestaoController@salvarAta')->name('reuniao.salvar-ata');
+    Route::get('gestao/{id}/documento', 'DocumentoController@documentoIndex')->name('gestao.documento');
+    Route::get('/download/{id}', 'DocumentoController@download')->name('documento.download');
+    Route::get('/documento/cadastrar/{id}', 'DocumentoController@cadastrarDocumento')->name('documento.cadastrar');
+    Route::post('/documento/salvar', 'DocumentoController@salvarDocumento')->name('documento.salvar');
+    Route::get('/documentos/novo-comentario/{id}', 'DocumentoController@createComentario')->name('documento.novoComentario');
+    Route::post('/documentos/salvar-comentario/{id}','DocumentoController@salvarComentario')->name('documento.salvarComentario');
 
-    Route::get('/gestao/cronograma/{id}', 'GestaoController@cronogramaIndex')->name('gestao.cronograma');
-    Route::get('/gestao/cronograma/cadastrar/{id}', 'GestaoController@cadastrarCronograma')->name('cronograma.cadastrar');
-    Route::post('/gestao/cronograma/salvar/{id}', 'GestaoController@salvarCronograma')->name('cronograma.salvar');
-    Route::get('/gestao/cronograma/editar/{id}', 'GestaoController@editarCronograma')->name('cronograma.editar');
-    Route::put('/gestao/cronograma/atualizar/{id}', 'GestaoController@atualizarCronograma')->name('cronograma.atualizar');
-    Route::delete('/gestao/cronograma/excluir/{id}/{cronogramaId}', 'GestaoController@excluirCronograma')->name('cronograma.excluir');
+
+    Route::get('gestao/{id}/reuniao', 'ReuniaoController@reuniaoIndex')->name('gestao.reuniao');
+    Route::get('/reuniao/cadastrar/{id}', 'ReuniaoController@cadastrarReuniao')->name('reuniao.cadastrar');
+    Route::post('/reuniao/salvar', 'ReuniaoController@salvarReuniao')->name('reuniao.salvar');
+    Route::get('/reunioes/cadastrar-ata/{id}', 'ReuniaoController@cadastrarAta')->name('reuniao.cadastrarAta');
+    Route::post('reunioes/salvar-ata/{reuniao}', 'ReuniaoController@salvarAta')->name('reuniao.salvar-ata');
+
+
+    Route::get('/gestao/cronograma/{id}', 'CronogramaController@cronogramaIndex')->name('gestao.cronograma');
+    Route::get('/gestao/cronograma/cadastrar/{id}', 'CronogramaController@cadastrarCronograma')->name('cronograma.cadastrar');
+    Route::post('/gestao/cronograma/salvar/{id}', 'CronogramaController@salvarCronograma')->name('cronograma.salvar');
+    Route::get('/gestao/cronograma/editar/{id}', 'CronogramaController@editarCronograma')->name('cronograma.editar');
+    Route::put('/gestao/cronograma/atualizar/{id}', 'CronogramaController@atualizarCronograma')->name('cronograma.atualizar');
+    Route::delete('/gestao/cronograma/excluir/{id}/{cronogramaId}', 'CronogramaController@excluirCronograma')->name('cronograma.excluir');
+
+
+
+
 
 
     Route::middleware(['custom-auth-admin'])->group(function () {
@@ -77,7 +82,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('professores', 'ProfessorController');
         Route::get('professores/edit/{id}', 'ProfessorController@edit')->name('professores.edit');
         Route::put('/professores/{id}', 'ProfessorController@update')->name('professores.update');
-        
+
         Route::resource('materiasProfessor', 'MateriasProfessorController');
         Route::get('materiasProfessor/{userId}/edit', 'MateriasProfessorController@edit')->name('materiasProfessor.edit');
         Route::put('materiasProfessor/{userId}', 'MateriasProfessorController@update')->name('materiasProfessor.update');

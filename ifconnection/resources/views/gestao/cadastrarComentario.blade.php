@@ -9,7 +9,7 @@
 
             <div class="mb-3">
                 <label for="nome" class="form-label">Comentário:</label>
-                <input type="text" id="comentario" name="comentario" class="form-control" value="{{ $comentarioExistente }}">
+                <textarea type="text" rows="3" id="comentario" name="comentario" class="form-control" value="{{ $comentarioExistente }}"></textarea>
             </div>
 
             <div class="d-grid gap-2">

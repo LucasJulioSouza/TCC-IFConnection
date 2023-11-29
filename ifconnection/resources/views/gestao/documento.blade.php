@@ -17,9 +17,9 @@
                         <strong>Descrição:</strong> {{ $documento->descricao }}
                     </div>
                     <div class="mb-2">
-                        <strong>Comentário:</strong> {{ $documento->comentario }}
+                        <strong>Comentário:</strong> {{ $documento->comentario}}
                     </div>
-                    
+
                     @if ($documento->comentario)
                         <a href="{{ route('documento.novoComentario', ['id' => $documento->id]) }}" class="btn btn-secondary">Editar Comentário</a>
                     @else

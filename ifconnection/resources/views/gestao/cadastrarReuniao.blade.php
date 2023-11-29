@@ -15,7 +15,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="descricao" class="form-label">link:</label>
+                <label for="descricao" class="form-label">link de acesso:</label>
                 <textarea id="descricao" name="link" class="form-control"></textarea>
             </div>
 

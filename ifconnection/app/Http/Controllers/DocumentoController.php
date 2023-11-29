@@ -8,79 +8,84 @@ use Illuminate\Http\Request;
 
 class DocumentoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+
+
+    public function documentoIndex($id) {
+        $documentos = Documento::where('orientacao_id', $id)->get();
+        return view('gestao.documento', compact('id', 'documentos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+
+
+
+    public function cadastrarDocumento($id){
+
+        return view('gestao.cadastrarDocumento', compact('id'));
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function salvarDocumento(Request $request){
+
+        $request->validate([
+            'nome' => 'required',
+            'descricao' => 'required',
+            'documento' => 'required|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+
+        $documento = new Documento();
+        $documento->nome = $request->nome;
+        $documento->descricao = $request->descricao;
+        $documento->orientacao_id = $request->orientacao_id;
+
+        if ($request->hasFile('documento')) {
+            $documentoArquivo = $request->file('documento');
+            $nomeArquivo = time() . '_' . $documentoArquivo->getClientOriginalName();
+            $caminho = $documentoArquivo->storeAs('documentos', $nomeArquivo);
+            $documento->documento = $caminho;
+        }
+
+        $documento->save();
+
+        return redirect()->route('gestao.documento', ['id' => $request->orientacao_id]);
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Documento  $documento
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Documento $documento)
-    {
-        //
+
+
+    public function download($id){
+        $documento = Documento::find($id);
+
+        $pathToFile = storage_path('app/' . $documento->documento);
+        $nomeDoArquivo = $documento->nome_do_documento;
+
+        return response()->download($pathToFile, $nomeDoArquivo);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Documento  $documento
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Documento $documento)
-    {
-        //
+    public function createComentario($id){
+
+        $documento = Documento::findOrFail($id);
+
+        $comentarioExistente= $documento->comentario;
+
+        return view('gestao.cadastrarComentario',  compact('id','comentarioExistente'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Documento  $documento
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Documento $documento)
-    {
-        //
+    public function salvarComentario(Request $request, $id){
+
+        $request->validate([
+
+            'comentario' => 'nullable|string',
+
+        ]);
+
+
+        $documento = Documento::findOrFail($id);
+
+        $documento->update(['comentario' => $request->input('comentario')]);
+
+
+        return redirect()->route('gestao.documento', ['id' => $documento->orientacao_id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Documento  $documento
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Documento $documento)
-    {
-        //
-    }
 }

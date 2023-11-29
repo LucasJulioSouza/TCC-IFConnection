@@ -23,10 +23,10 @@
             </div>
             @endif
 
-            <div class="d-flex justify-content-between mt-4">
+
                 <a href="{{ route('professores.index') }}" class="btn btn-secondary">Voltar</a>
                 <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-            </div>
+
         </form>
     </div>
 @endsection

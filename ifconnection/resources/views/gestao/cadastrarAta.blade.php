@@ -7,16 +7,16 @@
         <form action="{{ route('reuniao.salvar-ata', ['reuniao' => $id]) }}" method="post" >
             @csrf
 
-            
+
 
             <div class="form-group">
-                <label for="ata">Ata:</label>
+                <label for="ata">Discussão:</label>
                 <textarea id="ata" name="ata" class="form-control" rows="5" required></textarea>
             </div>
 
 
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">Salvar Ata</button>
+                <button type="submit" class="btn btn-primary">Salvar tema discutido</button>
             </div>
         </form>
 

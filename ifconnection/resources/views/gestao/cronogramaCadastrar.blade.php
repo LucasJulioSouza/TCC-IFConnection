@@ -13,7 +13,7 @@
             </div>
 
             <div class="form-group">
-                <label for="data">Data:</label>
+                <label for="data">Data de entrega:</label>
                 <input type="date" class="form-control" id="data" name="data" required>
             </div>
 
